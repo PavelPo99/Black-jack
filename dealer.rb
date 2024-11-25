@@ -1,6 +1,8 @@
 require_relative "player"
 
 class Dealer < Player
+	attr_accessor :skip_move_count
+	
 	def initialize
 		@skip_move_count = 0
 		super
@@ -9,7 +11,7 @@ class Dealer < Player
 	def move_player
 		if @point <= 17 && @card.length < 3 
 			:take_card
-		elsif @skip_move_count < 2
+		elsif @skip_move_count < 1
 			@skip_move_count += 1
 			:skip
 		else
