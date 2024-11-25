@@ -9,7 +9,6 @@ class Programm
 
 	def initialize
 		@players = [User.new, Dealer.new]
-		#@deck_cards = Desk.new
 		@bank = 0
 		@round = Round.new(@players)
 	end
