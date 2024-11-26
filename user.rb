@@ -8,7 +8,7 @@ class User < Player
 	end
 
 	def move_player
-		puts "1. Открыть карты"
+		puts "\n1. Открыть карты"
 		puts "2. Пропустить ход" if @skip_move_count < 1
 		puts "3. Взять карту" if @card.length < 3 
 	

@@ -1,11 +1,11 @@
 require_relative "user"
 require_relative "dealer"
-require_relative "desk"
+require_relative "cards"
 require_relative "round"
 
 
 class Programm
-	attr_accessor :players, :deck_cards, :bank
+	attr_accessor :players#, :deck_cards, :bank
 
 	def initialize
 		@players = [User.new, Dealer.new]
@@ -13,8 +13,6 @@ class Programm
 		@round = Round.new(@players)
 	end
 
-	
-	
 
 	def main
 		
@@ -35,7 +33,6 @@ class Programm
 			puts "Сыграть еще раз?\n1. Да\n2. Хaрош, брат. Жена убьёт\n\n\n"
 			play_again = gets.chomp.to_i
 			break if play_again == 2
-			
 		end
 		puts "Спасибо за игру"
 	end
@@ -43,7 +40,6 @@ class Programm
 
 	private
 
-	
 
 	def result(winner)
 		case winner
@@ -52,7 +48,7 @@ class Programm
 			puts "\nПоздравляем #{@name_player}, ты крассавчик. Вот твои бабки!"	
 		when @players[1]
 			bet_for_winner(@players[1], @bank)
-			puts "\nДиллер победил, ты лох!"
+			puts "\nДиллер забирает банк!"
 		when :draw
 			bet_for_winner(@players[0], @bank/2)
 			bet_for_winner(@players[1], @bank/2)
@@ -78,9 +74,9 @@ class Programm
 
 
 
-	def each_players(&block)
-	    @players.each(&block)
-	end
+	# def each_players(&block)
+	#     @players.each(&block)
+	# end
 		
 end
 
