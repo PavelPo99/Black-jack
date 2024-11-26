@@ -13,7 +13,6 @@ class Round
 	
 	# def initialize
 	# 	@players = [User.new, Dealer.new]
-		
 	# end
 
 	def play
@@ -55,9 +54,9 @@ class Round
 	
 	def display_on_desk
 		puts "\nкарты дилера:\n" + "** " * @players[1].card.length
-		puts "\дилера карты:\n#{@players[1].card}"  
-		puts "очки: #{@players[1].point}"
-		puts "\nкoшелек дилера: #{@players[1].cash} $"
+		# puts "дилера карты:\n#{@players[1].card}"  
+		# puts "очки: #{@players[1].point}"
+		puts "кoшелек дилера: #{@players[1].cash} $"
 
 		puts ''
 

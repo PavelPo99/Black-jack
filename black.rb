@@ -5,7 +5,7 @@ require_relative "round"
 
 
 class Programm
-	attr_accessor :players#, :deck_cards, :bank
+	attr_accessor :players
 
 	def initialize
 		@players = [User.new, Dealer.new]
@@ -20,7 +20,7 @@ class Programm
 		@name_player = gets.chomp
 		
 		loop do
-			puts "\nСтавка 10$"
+			puts "\n\nСтавка 10$"
 			sleep(1)
 			if bet_on_stake == nil
 				puts "Деньги закончились!"
@@ -30,7 +30,7 @@ class Programm
 			
 			result(@round.play)
 
-			puts "Сыграть еще раз?\n1. Да\n2. Хaрош, брат. Жена убьёт\n\n\n"
+			puts "Сыграть еще раз?\n1. Да\n2. Хaрош, брат. Жена убьёт"
 			play_again = gets.chomp.to_i
 			break if play_again == 2
 		end
@@ -50,8 +50,9 @@ class Programm
 			bet_for_winner(@players[1], @bank)
 			puts "\nДиллер забирает банк!"
 		when :draw
-			bet_for_winner(@players[0], @bank/2)
-			bet_for_winner(@players[1], @bank/2)
+			draw_bank = @bank/2
+			bet_for_winner(@players[0], draw_bank)
+			bet_for_winner(@players[1], draw_bank)
 			puts "\nНичья! Возвращаем деньги"
 		when :no_winner
 			puts "\nПобедителя нет! Шекели сгорают"	
