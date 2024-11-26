@@ -50,19 +50,17 @@ class Round
 			end
 		end
 	end
-
 	
 	def display_on_desk
-		puts "\nкарты дилера:\n" + "** " * @players[1].card.length
-		# puts "дилера карты:\n#{@players[1].card}"  
-		# puts "очки: #{@players[1].point}"
+		puts "\nкарты дилера:\n" +  " __  "  * @players[1].card.length + "\n" + "|**| " * @players[1].card.length + "\n"  + "|__| " * @players[1].card.length
 		puts "кoшелек дилера: #{@players[1].cash} $"
 
 		puts ''
 
-		puts "\nтвои карты:\n#{@players[0].card}"   #{name_player.capitalize},
-		puts "твой кoшелек: #{@players[0].cash} $"
-		puts "очки: #{@players[0].point}\n"
+		puts "\nтвои карты:"
+		@players[0].card.each { |c| print   "|#{c} | "}
+		puts "\nочки: #{@players[0].point}"
+		puts "твой кoшелек: #{@players[0].cash} $\n"
 	end
 
 

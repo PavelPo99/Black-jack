@@ -10,9 +10,11 @@ class Dealer < Player
 
 	def move_player
 		if @point <= 17 && @card.length < 3 
+			puts "\n*Дилер взял карту"
 			:take_card
 		elsif @skip_move_count < 1
 			@skip_move_count += 1
+			puts "\n*Дилер пропустил ход"
 			:skip
 		else
 			:open_card

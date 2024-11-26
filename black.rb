@@ -42,6 +42,20 @@ class Programm
 
 
 	def result(winner)
+		puts "-------------------------------------------"
+		puts "карты дилера:\n"
+		@players[1].card.each { |c| print   "|#{c} | "}
+		puts "\nочки: #{@players[1].point}"
+		puts "кoшелек дилера: #{@players[1].cash} $"
+
+		puts ''
+
+		puts "твои карты:"
+		@players[0].card.each { |c| print   "|#{c} | "}
+		puts "\nочки: #{@players[0].point}"
+		puts "твой кoшелек: #{@players[0].cash} $"
+		puts "-------------------------------------------"
+
 		case winner
 		when @players[0]
 			bet_for_winner(@players[0], @bank)
