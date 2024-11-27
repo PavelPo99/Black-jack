@@ -14,9 +14,16 @@ class User < Player
 	
 		choice = gets.chomp.to_i
 		
-		@skip_move_count += 1 if choice == 2
-		hash_move = { 1 => :open_card, 2 => :skip, 3 => :take_card}
-  	hash_move[choice]
+		if choice == 2 && @skip_move_count < 1
+			@skip_move_count += 1
+			:skip
+		elsif choice == 3 && @card.length < 3 
+			:take_card
+		elsif choice == 1
+			:open_card
+		else
+			:error
+		end
 	end
 end
 

@@ -31,33 +31,63 @@ class Round
 
 
 	private
+	
+	def counting_results
+		hash_players= {}
+
+		@players.each do |player|
+			hash_players[player] = player.point.to_i
+		end
+
+		filtered_hash = hash_players.select { |key, value| value < 22 }
+		max_value = filtered_hash.max_by { |key, value| value }
+
+		hash_winner = filtered_hash.select { |key, value| max_value[1] == value }
+		hash_winner
+	end
 
 	def move_players
 		@players.each do |player|
 			player.point_count			
-			move = player.move_player
+	
+			attempt = 0
+			begin
 
-			case move
-			when :take_card
-				player.card << @cards.take_card
-				player.point_count
-			when :skip
-				player.point_count
-				next
-			when :open_card
-				player.point_count
+				move = player.move_player
+
+				case move
+				when :take_card
+					player.card << @cards.take_card
+					player.point_count
+				when :skip
+					player.point_count
+					next
+				when :open_card
+					player.point_count
+					break
+				when :error	
+					raise "Такого пункта не существует!" 
+				end
+
+			rescue RuntimeError => e
+				puts e
+				attempt += 1
+
+				retry if attempt < 3
+
+				puts "\nЛимит попыток превышен! Игра закончена."
 				break
-			end
+	    end
 		end
 	end
 	
 	def display_on_desk
-		puts "\nкарты дилера:\n" +  " __  "  * @players[1].card.length + "\n" + "|**| " * @players[1].card.length + "\n"  + "|__| " * @players[1].card.length
-		puts "кoшелек дилера: #{@players[1].cash} $"
+		@players[1..].each do |player|
+			puts "\nкарты дилера:\n" +  " __  "  * player.card.length + "\n" + "|**| " * player.card.length + "\n"  + "|__| " * player.card.length
+			puts "кoшелек дилера: #{player.cash} $"		
+		end
 
-		puts ''
-
-		puts "\nтвои карты:"
+		puts "\n\nтвои карты:"
 		@players[0].card.each { |c| print   "|#{c} | "}
 		puts "\nочки: #{@players[0].point}"
 		puts "твой кoшелек: #{@players[0].cash} $\n"
@@ -67,7 +97,6 @@ class Round
 	def begin_play	
 		@cards = Cards.new
 
-
 		@players.each do |player| 
 			player.skip_move_count = 0
 			player.point = 0
@@ -75,20 +104,6 @@ class Round
 			2.times { player.card << @cards.take_card }	
 			player.point_count
 		end	
-	end
-
-
-	def counting_results
-		
-		if (@players[1].point.to_i < @players[0].point.to_i || @players[1].point.to_i > 21) && @players[0].point.to_i < 22
-			@players[0]
-		elsif (@players[0].point.to_i < @players[1].point.to_i || @players[0].point.to_i > 21) && @players[1].point.to_i < 22
-			@players[1]
-		elsif @players[0].point.to_i == @players[1].point.to_i
-			:draw
-		else
-			:no_winner
-		end
 	end
 end
 
