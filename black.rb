@@ -28,15 +28,6 @@ class Programm
 			
 			add_players(num_player)
 
-		# rescue RuntimeError => e
-		# 	puts e
-		# 	attempt += 1
-
-		# 	retry if attempt < 4
-
-		# 	puts "\nЛимит попыток превышен!"
-		# end
-
 			loop do
 				puts "\n\nСтавка 10$"
 				sleep(1)
@@ -130,13 +121,6 @@ class Programm
 			@bank += 10
 		end		
 	end
-
-
-
-	# def each_players(&block)
-	#     @players.each(&block)
-	# end
-		
 end
 
 

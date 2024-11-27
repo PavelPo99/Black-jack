@@ -5,16 +5,11 @@ require_relative "round"
 require 'byebug'
 
 class Round
-	# attr_accessor :players
 
 	def initialize(players)
 		@players = players		
 	end
 	
-	# def initialize
-	# 	@players = [User.new, Dealer.new]
-	# end
-
 	def play
 		begin_play
 

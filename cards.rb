@@ -2,8 +2,6 @@ class Cards
 
 	CARDS = []
 
-	#attr_accessor :cards
-
 	def initialize
 		@cards = CARDS
 		generate_card
